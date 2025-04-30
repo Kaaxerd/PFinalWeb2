@@ -1,13 +1,13 @@
-@authToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U5ODQ3Y2QwZTAyMTdiMGVkZjRkOWIiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzM1NzA2MCwiZXhwIjoxNzQzMzY0MjYwfQ.yrHKrzYnxkIgZkiAaC-RKI-PcS6SwHD-5xhWzqMYhcs
-
+@authToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODEyNGY2OWE3ZDI2MGMyMmFjY2Y4NDIiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjAzMDQ0MSwiZXhwIjoxNzQ2MDM3NjQxfQ.tecpbpc7Tz-OTdwMutPDTOzGz8OI65W9QSDdcRcRVLM
 ### Registro de un nuevo usuario
 POST http://localhost:3000/api/auth/register
 Content-Type: application/json
 
 {
-  "email": "cristiano.ronaldo@email.com",
-  "password": "ay-mi-m4dre-3l-b1ch8888",
-  "autonomous": false
+  "email": "kcharald@gmail.com",
+  "password": "123412345",
+  "autonomous": false,
+  "nif": "98765432Z"
 }
 
 ### Registro de un nuevo usuario autónomo

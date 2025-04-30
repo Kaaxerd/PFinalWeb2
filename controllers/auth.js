@@ -6,29 +6,7 @@ const {usersModel} = require("../models")
 const nodemailer = require('nodemailer')
 const crypto = require('crypto')
 const bcrypt = require("bcrypt")
-
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-    }
-})
-
-const sendVerificationMail = async (email, verificationCode) => {
-    const mailOptions = {
-        from: process.env.EMAIL_USER,
-        to: email,
-        subject: 'Verificación de correo',
-        text: `Tu código de verificación es: ${verificationCode}`
-    }
-
-    try {
-        await transporter.sendMail(mailOptions);
-    } catch {
-        console.log("Error al enviar el correo");
-    }
-}
+const { sendEmail } = require("../utils/handleEmail")
 
 /**
  * Encargado de registrar un nuevo usuario
@@ -54,11 +32,16 @@ const registerCtrl = async (req, res) => {
             company = invitedCompany._id;
         }
 
-        const body = {...req, verificationCode, role, company} // Con "..." duplicamos el objeto y le añadimos o sobreescribimos una propiedad
+        const body = {...req, verificationCode, role, company}
         const dataUser = await usersModel.create(body); 
         dataUser.set('password', undefined, { strict: false });
 
-        //await sendVerificationMail(dataUser.email, verificationCode);
+        await sendEmail({
+            to: req.email,
+            subject: "Verify your account",
+            text: `Your verification code is: ${verificationCode}`,
+            from: process.env.EMAIL
+        });
 
         const data = {
             token: await tokenSign(dataUser),
