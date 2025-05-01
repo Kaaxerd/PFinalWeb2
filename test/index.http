@@ -1,4 +1,4 @@
-@authToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODEyNGY2OWE3ZDI2MGMyMmFjY2Y4NDIiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjAzMDQ0MSwiZXhwIjoxNzQ2MDM3NjQxfQ.tecpbpc7Tz-OTdwMutPDTOzGz8OI65W9QSDdcRcRVLM
+@authToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U5ODcxZWZhZDg5NDJiZjE4MWRlY2YiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjEyODY3MSwiZXhwIjoxNzQ2MTM1ODcxfQ.bz1z4uV4LZSVEtyHIO1lp7K7ZDgup5wAbG_K_PgSnNc
 ### Registro de un nuevo usuario
 POST http://localhost:3000/api/auth/register
 Content-Type: application/json
@@ -160,3 +160,53 @@ Content-Type: application/json
   "nif": "12345678A",
   "invitationToken": "7ccade1945873f0dfdec8251f1d449bc"
 }
+
+### Crear un cliente
+POST http://localhost:3000/api/client
+Content-Type: application/json
+Authorization: {{authToken}}
+
+{
+  "name": "Cliente Uno",
+  "nif": "12345678A",
+  "email": "cliente@ejemplo.com",
+  "phone": "912345678",
+  "address": "Calle Falsa 123",
+  "postalCode": "28080",
+  "city": "Madrid",
+  "province": "Madrid"
+}
+
+### Actualizar un cliente
+PUT http://localhost:3000/api/client/6813dde588146b4212ff62c3
+Content-Type: application/json
+Authorization: {{authToken}}
+
+{
+  "phone": "987654321",
+  "city": "Barcelona"
+}
+
+### Obtener todos los clientes
+GET http://localhost:3000/api/client
+Authorization: {{authToken}}
+
+### Obtener un cliente por ID
+GET http://localhost:3000/api/client/6813dde588146b4212ff62c3
+Authorization: {{authToken}}
+
+### Soft delete de un cliente
+PATCH http://localhost:3000/api/client/archive/6813dde588146b4212ff62c3
+Authorization: {{authToken}}
+
+### Hard delete de un cliente
+DELETE http://localhost:3000/api/client/6813dde588146b4212ff62c3
+Authorization: {{authToken}}
+
+### Ver clientes eliminados (soft delete)
+GET http://localhost:3000/api/client/archived/all
+Authorization: {{authToken}}
+
+### Restaurar un cliente eliminado (soft delete)
+PATCH http://localhost:3000/api/client/restore/6813dde588146b4212ff62c3
+Authorization: {{authToken}}

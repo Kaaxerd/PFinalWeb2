@@ -14,6 +14,7 @@ app.use(express.json());
 
 app.use('/api/auth', authRoutes); // Rutas de autentificación
 app.use('/api/company', companyRoutes); // Rutas de empresa
+app.use("/api/client", require("./routes/clients")); // Rutas de clientes
 
 // Comenzar el server
 app.listen(process.env.PORT, () => {
