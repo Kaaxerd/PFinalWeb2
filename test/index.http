@@ -1,4 +1,4 @@
-@authToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U5ODcxZWZhZDg5NDJiZjE4MWRlY2YiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjIwMjMwMSwiZXhwIjoxNzQ2MjA5NTAxfQ.HhqB9NQLlWZjoSznXO3XniZd6jefQ7IcAAZVedC5d44
+@authToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U5ODcxZWZhZDg5NDJiZjE4MWRlY2YiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjIxMzE2NCwiZXhwIjoxNzQ2MjIwMzY0fQ.wYoaV5koCRPy0rh__5pgMlZJ_RREkhgNNfdAHSiOjuk
 ### Registro de un nuevo usuario
 POST http://localhost:3000/api/auth/register
 Content-Type: application/json
@@ -254,4 +254,59 @@ Authorization: {{authToken}}
 
 ### Restaurar un proyecto archivado (soft delete)
 PATCH http://localhost:3000/api/project/restore/6814f15ab62928e658accef2
+Authorization: {{authToken}}
+
+### Crear albarán simple de una persona
+POST http://localhost:3000/api/deliverynote
+Content-Type: application/json
+Authorization: {{authToken}}
+
+{
+  "type": "hours",
+  "project": "6814f15ab62928e658accef2",
+  "people": [
+    { "name": "Juan Pérez", "hours": 6 }
+  ]
+}
+
+### Crear albarán múltiple de materiales
+POST http://localhost:3000/api/deliverynote
+Content-Type: application/json
+Authorization: {{authToken}}
+
+{
+  "type": "materials",
+  "project": "6814f15ab62928e658accef2",
+  "materials": [
+    { "name": "Cemento", "quantity": 10 },
+    { "name": "Arena", "quantity": 5 }
+  ]
+}
+
+### Listar albaranes
+GET http://localhost:3000/api/deliverynote
+Authorization: {{authToken}}
+
+### Ver albarán con detalles
+GET http://localhost:3000/api/deliverynote/6814fb15e32eaf0232265652
+Authorization: {{authToken}}
+
+### Generar PDF de un albarán
+GET http://localhost:3000/api/deliverynote/pdf/6814fb15e32eaf0232265652
+Authorization: {{authToken}}
+
+### Fimar un albarán
+POST http://localhost:3000/api/deliverynote/sign/6814fb15e32eaf0232265652
+Authorization: {{authToken}}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="signature"; filename="firma.jpg"
+Content-Type: image/jpeg
+
+< ./firma.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+### Eliminar un albarán que no está firmado
+DELETE http://localhost:3000/api/deliverynote/6814fb18e32eaf0232265655
 Authorization: {{authToken}}
