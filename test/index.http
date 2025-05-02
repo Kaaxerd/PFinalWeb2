@@ -1,4 +1,4 @@
-@authToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U5ODcxZWZhZDg5NDJiZjE4MWRlY2YiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjEyODY3MSwiZXhwIjoxNzQ2MTM1ODcxfQ.bz1z4uV4LZSVEtyHIO1lp7K7ZDgup5wAbG_K_PgSnNc
+@authToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U5ODcxZWZhZDg5NDJiZjE4MWRlY2YiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjIwMjMwMSwiZXhwIjoxNzQ2MjA5NTAxfQ.HhqB9NQLlWZjoSznXO3XniZd6jefQ7IcAAZVedC5d44
 ### Registro de un nuevo usuario
 POST http://localhost:3000/api/auth/register
 Content-Type: application/json
@@ -209,4 +209,49 @@ Authorization: {{authToken}}
 
 ### Restaurar un cliente eliminado (soft delete)
 PATCH http://localhost:3000/api/client/restore/6813dde588146b4212ff62c3
+Authorization: {{authToken}}
+
+### Crear un proyecto
+POST http://localhost:3000/api/project
+Content-Type: application/json
+Authorization: {{authToken}}
+
+{
+  "name": "Proyecto Alpha",
+  "description": "Primera fase de desarrollo",
+  "client": "6814eed1a7a267382e2902d0"
+}
+
+### Actualizar un proyecto
+PUT http://localhost:3000/api/project/6814f15ab62928e658accef2
+Content-Type: application/json
+Authorization: {{authToken}}
+
+{
+  "description": "Descripción actualizada del proyecto",
+  "status": "completed"
+}
+
+### Obtener todos los proyectos
+GET http://localhost:3000/api/project
+Authorization: {{authToken}}
+
+### Obtener un proyecto por ID
+GET http://localhost:3000/api/project/6814f15ab62928e658accef2
+Authorization: {{authToken}}
+
+### Soft delete de un proyecto
+PATCH http://localhost:3000/api/project/archive/6814f15ab62928e658accef2
+Authorization: {{authToken}}
+
+### Borrar un proyecto (hard delete)
+DELETE http://localhost:3000/api/project/6814f15ab62928e658accef2
+Authorization: {{authToken}}
+
+### Ver proyectos archivados (soft delete)
+GET http://localhost:3000/api/project/archive
+Authorization: {{authToken}}
+
+### Restaurar un proyecto archivado (soft delete)
+PATCH http://localhost:3000/api/project/restore/6814f15ab62928e658accef2
 Authorization: {{authToken}}
