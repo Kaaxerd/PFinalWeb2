@@ -18,7 +18,7 @@ const swaggerOptions = {
     definition: {
       openapi: "3.0.0",
       info: {
-        title: "API Intermedia",
+        title: "Práctica Final API",
         version: "1.0.0",
         description: "Documentación de la API para gestión de usuarios, clientes, proyectos y albaranes."
       },
@@ -31,7 +31,7 @@ const swaggerOptions = {
 };
 
 const swaggerSpec = swaggerJSDoc(swaggerOptions);
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec)); // Montamos la ruta /api-docs
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec)); // Ruta de documentación
 
 // Comenzar el server
 /* app.listen(process.env.PORT, () => {
