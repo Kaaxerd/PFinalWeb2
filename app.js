@@ -1,7 +1,6 @@
 require('dotenv').config();
 const express = require('express');
 const dbConnect = require('./config/mongo');
-//const bodyParser = require('body-parser');
 
 // Rutas
 const authRoutes = require('./routes/auth');
@@ -10,6 +9,29 @@ const companyRoutes = require('./routes/company');
 const app = express();
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+const swaggerUi = require("swagger-ui-express");
+const swaggerJSDoc = require("swagger-jsdoc");
+
+const swaggerOptions = {
+    definition: {
+      openapi: "3.0.0",
+      info: {
+        title: "API Intermedia",
+        version: "1.0.0",
+        description: "Documentación de la API para gestión de usuarios, clientes, proyectos y albaranes."
+      },
+      servers: [
+        { url: "http://localhost:3000", description: "Servidor local" }
+      ]
+    },
+    // Aquí indicamos dónde buscar comentarios JSDoc
+    apis: ["./routes/*.js", "./controllers/*.js"]
+};
+
+const swaggerSpec = swaggerJSDoc(swaggerOptions);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec)); // Montamos la ruta /api-docs
 
 // Comenzar el server
 /* app.listen(process.env.PORT, () => {

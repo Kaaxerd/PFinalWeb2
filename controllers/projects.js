@@ -44,7 +44,7 @@ const updateProjectCtrl = async (req, res) => {
     }
 };
 
-const getAllProjectsCtrl = async (req, res) => {
+const getProjectsCtrl = async (req, res) => {
     try {
       const { _id: userId, company } = req.user;
   
@@ -172,7 +172,7 @@ const restoreProjectCtrl = async (req, res) => {
 module.exports = {
     createProjectCtrl,
     updateProjectCtrl,
-    getAllProjectsCtrl,
+    getProjectsCtrl,
     getProjectByIdCtrl,
     archiveProjectCtrl,
     deleteProjectCtrl,

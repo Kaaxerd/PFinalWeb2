@@ -11,7 +11,8 @@ beforeAll(async () => {
 
       if (res.statusCode === 200 && res.body.token) {
         global.token = `Bearer ${res.body.token}`;
-        console.log("✅ Token cargado correctamente para los tests");
+        global.clientId = res.body.user._id; // Verifica que esta línea esté funcionando correctamente
+        console.log("✅ Token y clientId cargados correctamente para los tests");
       } else {
         throw new Error("❌ No se pudo obtener el token de login.");
       }
