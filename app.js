@@ -1,6 +1,10 @@
 require('dotenv').config();
 const express = require('express');
 const dbConnect = require('./config/mongo');
+/* const cors = require('cors'); */
+const morganBody = require('morgan-body');
+const loggerStream = require('./utils/handleLogger');
+require('dotenv').config();
 
 // Rutas
 const authRoutes = require('./routes/auth');
@@ -10,6 +14,14 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+morganBody(app, {
+  noColors: true,
+  skip: function (req, res) {
+    return res.statusCode < 400;
+  },
+  stream: loggerStream
+});
 
 const swaggerUi = require("swagger-ui-express");
 const swaggerJSDoc = require("swagger-jsdoc");
