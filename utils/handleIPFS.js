@@ -13,7 +13,7 @@ const uploadFileToIPFS = async (filePath) => {
     const res = await axios.post(PINATA_URL, data, {
       headers: {
         ...data.getHeaders(),
-        Authorization: `Bearer ${PINATA_JWT}`
+        Authorization: `Bearer ${process.env.PINATA_JWT}`
       }
     });
 

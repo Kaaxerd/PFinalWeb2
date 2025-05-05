@@ -1,13 +1,13 @@
-@authToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U5ODcxZWZhZDg5NDJiZjE4MWRlY2YiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjIxMzE2NCwiZXhwIjoxNzQ2MjIwMzY0fQ.wYoaV5koCRPy0rh__5pgMlZJ_RREkhgNNfdAHSiOjuk
+@authToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U5ODcxZWZhZDg5NDJiZjE4MWRlY2YiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjQ2NTU0NywiZXhwIjoxNzQ2NDcyNzQ3fQ.oS5vHVufbBArecM7tgozjt5PoJBmSkhZV05VRFJogLQ
 ### Registro de un nuevo usuario
 POST http://localhost:3000/api/auth/register
 Content-Type: application/json
 
 {
-  "email": "kcharald@gmail.com",
+  "email": "haraldxerxes@gmail.com",
   "password": "123412345",
   "autonomous": false,
-  "nif": "98765432Z"
+  "nif": "62813456K"
 }
 
 ### Registro de un nuevo usuario
@@ -37,8 +37,8 @@ Content-Type: application/json
 Authorization: {{authToken}}
 
 {
-  "email": "nuevo.invitado@example.com",
-  "verificationCode": "717398"
+  "email": "haraldxerxes@gmail.com",
+  "verificationCode": "819746"
 }
 
 ### Login después de verificación del correo (El usuario tiene que estar verificado)
@@ -299,15 +299,15 @@ GET http://localhost:3000/api/deliverynote
 Authorization: {{authToken}}
 
 ### Ver albarán con detalles
-GET http://localhost:3000/api/deliverynote/6814fb15e32eaf0232265652
+GET http://localhost:3000/api/deliverynote/6818f350dce7317c047efb0a
 Authorization: {{authToken}}
 
 ### Generar PDF de un albarán
-GET http://localhost:3000/api/deliverynote/pdf/6814fb15e32eaf0232265652
+GET http://localhost:3000/api/deliverynote/pdf/6818f350dce7317c047efb0a
 Authorization: {{authToken}}
 
 ### Fimar un albarán
-POST http://localhost:3000/api/deliverynote/sign/6814fb15e32eaf0232265652
+POST http://localhost:3000/api/deliverynote/sign/6818f350dce7317c047efb0a
 Authorization: {{authToken}}
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 

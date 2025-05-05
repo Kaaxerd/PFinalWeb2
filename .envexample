@@ -1,0 +1,12 @@
+PORT=3000
+DB_URI=URL de la base de datos
+PUBLIC_URL=http://localhost:3000
+JWT_SECRET=JSON Token secreto
+PINATA_API_KEY=Clave de la API de Pinata
+PINATA_SECRET_API_KEY=Clave secreta de la API de Pinata
+PINATA_JWT=JSON Token de Pinata
+EMAIL=El correo electrónico de la cuenta de Google
+REFRESH_TOKEN=Token de actualización de la cuenta de Google
+CLIENT_SECRET=Código secreto del cliente de Google
+CLIENT_ID=ID del cliente de Google
+SLACK_WEBHOOK=Link del webhook de Slack
