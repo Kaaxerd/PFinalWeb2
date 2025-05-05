@@ -62,6 +62,7 @@ const verifyEmailCtrl = async (req, res) => {
 
         // Buscar al usuario por su correo electrónico
         const user = await usersModel.findOne({ email });
+    console.log("🔍 Usuario encontrado para verificación:", user);
 
         if (!user) {
             return handleHttpError(res, "USER_NOT_FOUND", 404);  // Si no existe el usuario, error 404

@@ -10,6 +10,17 @@ Content-Type: application/json
   "nif": "98765432Z"
 }
 
+### Registro de un nuevo usuario
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "prueba@email.com",
+  "password": "123412345",
+  "autonomous": false,
+  "nif": "62626262Z"
+}
+
 ### Registro de un nuevo usuario autónomo
 POST http://localhost:3000/api/auth/register
 Content-Type: application/json

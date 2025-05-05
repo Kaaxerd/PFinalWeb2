@@ -1,54 +1,79 @@
 const request = require("supertest");
 const app = require("../app");
 
-let token;
-let clientId;
+describe("Pruebas de clientes", () => {
+  let authToken;
+  let clientId;
 
-beforeAll(async () => {
-  const res = await request(app).post("/api/auth/login").send({
-    email: "cristiano.ronaldo@email.com",
-    password: "ay-mi-m4dre-3l-b1ch8888",
+  beforeAll(() => {
+    authToken = global.token;
   });
-  token = res.body.token;
-});
 
-describe("Pruebas de cliente", () => {
-  it("debería crear un cliente", async () => {
+  it("POST /api/client", async () => {
     const res = await request(app)
       .post("/api/client")
-      .set("Authorization", token)
+      .set("Authorization", authToken)
       .send({
-        name: "Cliente Test",
-        nif: `CIF${Date.now()}`,
-        address: "Dirección Test",
-        province: "Madrid",
+        name: "Cliente Uno",
+        nif: `A${Date.now()}`,
+        email: `cliente${Date.now()}@test.com`,
+        phone: "912345678",
+        address: "Calle Falsa 123",
+        postalCode: "28080",
+        city: "Madrid",
+        province: "Madrid"
       });
     expect([201, 409]).toContain(res.statusCode);
-    clientId = res.body?._id;
+    clientId = res.body._id;
   });
 
-  it("debería actualizar un cliente", async () => {
-    if (!clientId) return;
+  it("GET /api/client", async () => {
+    const res = await request(app)
+      .get("/api/client")
+      .set("Authorization", authToken);
+    expect(res.statusCode).toBe(200);
+  });
+
+  it("GET /api/client/:id", async () => {
+    const res = await request(app)
+      .get(`/api/client/${clientId}`)
+      .set("Authorization", authToken);
+    expect(res.statusCode).toBe(200);
+  });
+
+  it("PUT /api/client/:id", async () => {
     const res = await request(app)
       .put(`/api/client/${clientId}`)
-      .set("Authorization", token)
-      .send({ phone: "987654321" });
-    expect([200, 403]).toContain(res.statusCode);
+      .set("Authorization", authToken)
+      .send({ phone: "987654321", city: "Barcelona" });
+    expect(res.statusCode).toBe(200);
   });
 
-  it("debería hacer soft delete de un cliente", async () => {
-    if (!clientId) return;
+  it("PATCH /api/client/archive/:id", async () => {
     const res = await request(app)
       .patch(`/api/client/archive/${clientId}`)
-      .set("Authorization", token);
-    expect([200, 403]).toContain(res.statusCode);
+      .set("Authorization", authToken);
+    expect(res.statusCode).toBe(200);
   });
 
-  it("debería hacer hard delete del cliente", async () => {
-    if (!clientId) return;
+  it("GET /api/client/archived/all", async () => {
+    const res = await request(app)
+      .get("/api/client/archived/all")
+      .set("Authorization", authToken);
+    expect(res.statusCode).toBe(200);
+  });
+
+  it("PATCH /api/client/restore/:id", async () => {
+    const res = await request(app)
+      .patch(`/api/client/restore/${clientId}`)
+      .set("Authorization", authToken);
+    expect(res.statusCode).toBe(200);
+  });
+
+  it("DELETE /api/client/:id", async () => {
     const res = await request(app)
       .delete(`/api/client/${clientId}`)
-      .set("Authorization", token);
-    expect([200, 403]).toContain(res.statusCode);
+      .set("Authorization", authToken);
+    expect([200, 204]).toContain(res.statusCode);
   });
 });
